@@ -146,6 +146,7 @@ class HoeffdingTreeClassifier(BaseSKMObject, ClassifierMixin):
     _MAJORITY_CLASS = 'mc'
     _NAIVE_BAYES = 'nb'
     _NAIVE_BAYES_ADAPTIVE = 'nba'
+    _GAUSSIAN_HELLINGER = 'gaussian_hellinger'
 
     # ====================================
     # == Hoeffding Tree implementation ===
