@@ -6,6 +6,8 @@ from skmultiflow.utils import get_dimensions
 
 from ._split_criterion import GiniSplitCriterion
 from ._split_criterion import InfoGainSplitCriterion
+from ._split_criterion import HellingerDistanceCriterion
+from ._split_criterion import GaussianHellingerDistanceCriterion
 from ._nodes import ActiveLeaf
 from ._nodes import LearningNode
 from ._nodes import EFDTSplitNode
@@ -381,6 +383,10 @@ class ExtremelyFastDecisionTreeClassifier(HoeffdingTreeClassifier):
                 split_criterion = GiniSplitCriterion()
             elif self._split_criterion == self._INFO_GAIN_SPLIT:
                 split_criterion = InfoGainSplitCriterion()
+            elif self._split_criterion == self._HELLINGER:
+                split_criterion = HellingerDistanceCriterion()
+            elif self._split_criterion == self._GAUSSIAN_HELLINGER:
+                split_criterion = GaussianHellingerDistanceCriterion()
             else:
                 split_criterion = InfoGainSplitCriterion()
 
@@ -494,6 +500,10 @@ class ExtremelyFastDecisionTreeClassifier(HoeffdingTreeClassifier):
                 split_criterion = GiniSplitCriterion()
             elif self._split_criterion == self._INFO_GAIN_SPLIT:
                 split_criterion = InfoGainSplitCriterion()
+            elif self._split_criterion == self._HELLINGER:
+                split_criterion = HellingerDistanceCriterion()
+            elif self._split_criterion == self._GAUSSIAN_HELLINGER:
+                split_criterion = GaussianHellingerDistanceCriterion()
             else:
                 split_criterion = InfoGainSplitCriterion()
 

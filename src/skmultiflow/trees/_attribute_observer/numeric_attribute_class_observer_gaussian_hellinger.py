@@ -54,11 +54,14 @@ class NumericAttributeClassObserverGaussianHellinger(AttributeObserver):
     def get_best_evaluated_split_suggestion(self, criterion, pre_split_dist, att_idx, binary_only):
         best_suggestion = None
         suggested_split_values = self.get_split_point_suggestions()
+        # print("numeric_attribute_class_observer_gaussian_hellinger")
         for split_value in suggested_split_values:
             post_split_dist = self.get_class_dists_from_binary_split(split_value)
             merit = -np.inf
             info_gain = 0
+            # print("numeric_attribute_class_observer_gaussian_hellinger: for")
             if self._att_val_dist_per_class[0] is not None and self._att_val_dist_per_class[1] is not None:
+                # print("numeric_attribute_class_observer_gaussian_hellinger: if01")
                 n_mean = self._att_val_dist_per_class[0].get_mean()
                 n_variance = self._att_val_dist_per_class[0].get_variance()
                 p_mean = self._att_val_dist_per_class[1].get_mean()
@@ -66,6 +69,7 @@ class NumericAttributeClassObserverGaussianHellinger(AttributeObserver):
                 merit = GaussianHellingerDistanceCriterion.compute_hellinger(p_mean, p_variance, n_mean, n_variance)
 
             if best_suggestion is None or (merit+info_gain) > best_suggestion.merit:
+                # print("numeric_attribute_class_observer_gaussian_hellinger: if02")
                 num_att_binary_test = NumericAttributeBinaryTest(att_idx, split_value, True)
                 best_suggestion = AttributeSplitSuggestion(num_att_binary_test,
                                                            post_split_dist,

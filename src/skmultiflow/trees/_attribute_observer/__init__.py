@@ -9,5 +9,5 @@ from .numeric_attribute_class_observer_gaussian_hellinger import NumericAttribut
 
 __all__ = ["AttributeObserver", "AttributeObserverNull", "NominalAttributeClassObserver",
            "NominalAttributeRegressionObserver", "NumericAttributeClassObserverBinaryTree",
-           "NumericAttributeClassObserverGaussian", "NumericAttributeRegressionObserver",
-           "NumericAttributeClassObserverGaussianHellinger"]
+           "NumericAttributeClassObserverGaussian", "NumericAttributeClassObserverGaussianHellinger",
+           "NumericAttributeRegressionObserver"]
