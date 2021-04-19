@@ -2,11 +2,13 @@ import os
 import warnings
 import re
 from timeit import default_timer as timer
+from firebase import firebase
 
 from numpy import unique
 
 from skmultiflow.evaluation.base_evaluator import StreamEvaluator
 from skmultiflow.utils import constants
+from skmultiflow.utils import asips_utils
 
 
 class EvaluatePrequential(StreamEvaluator):
@@ -183,7 +185,7 @@ class EvaluatePrequential(StreamEvaluator):
                  output_file=None,
                  show_plot=False,
                  restart_stream=True,
-                 data_points_for_classification=False):
+                 data_points_for_classification=False,is_first_run=True):
 
         super().__init__()
         self._method = 'prequential'
@@ -195,6 +197,7 @@ class EvaluatePrequential(StreamEvaluator):
         self.output_file = output_file
         self.show_plot = show_plot
         self.data_points_for_classification = data_points_for_classification
+        self.is_first_run = is_first_run
 
         if not self.data_points_for_classification:
             if metrics is None:
@@ -227,11 +230,12 @@ class EvaluatePrequential(StreamEvaluator):
         warnings.filterwarnings("ignore", ".*invalid value encountered in true_divide.*")
         warnings.filterwarnings("ignore", ".*Passing 1d.*")
 
-    def evaluate(self, stream, model, model_names=None):
+    def evaluate(self, stream, model, model_names=None, is_first_run = True):
         """ Evaluates a model or set of models on samples from a stream.
 
         Parameters
         ----------
+        is_first_run: To check evaluation start wether from beginning or not
         stream: Stream
             The stream from which to draw the samples.
 
@@ -247,14 +251,16 @@ class EvaluatePrequential(StreamEvaluator):
             The trained model(s).
 
         """
+        self.is_first_run = is_first_run
         self._init_evaluation(model=model, stream=stream, model_names=model_names)
 
         if self._check_configuration():
-            self._reset_globals()
-            # Initialize metrics and outputs (plots, log files, ...)
-            self._init_metrics()
-            self._init_plot()
-            self._init_file()
+            if is_first_run:
+                self._reset_globals()
+                # Initialize metrics and outputs (plots, log files, ...)
+                self._init_metrics()
+                self._init_plot()
+                self._init_file()
 
             self.model = self._train_and_test()
 
@@ -312,6 +318,7 @@ class EvaluatePrequential(StreamEvaluator):
             first_run = False
 
         update_count = 0
+        negative_count = 0
         print('Evaluating...')
         while ((self.global_sample_count < actual_max_samples)
                & (self._end_time - self._start_time < self.max_time)
@@ -326,8 +333,29 @@ class EvaluatePrequential(StreamEvaluator):
                         try:
                             # Testing time
                             self.running_time_measurements[i].compute_testing_time_begin()
-                            prediction[i].extend(self.model[i].predict(X))
+                            y_pred = self.model[i].predict(X)
+                            prediction[i].extend(y_pred)
                             self.running_time_measurements[i].compute_testing_time_end()
+                            data = {'meanOfTheIntegratedProfile': X[0][0],
+                                    'standardDeviationOfTheIntegratedProfile': X[0][1],
+                                    'excessKurtosisOfTheIntegratedProfile': X[0][2],
+                                    'skewnessOfTheIntegratedProfile': X[0][3],
+                                    'meanOfTheDMSNRCurve': X[0][4],
+                                    'standardDeviationOfTheDMSNRCurve': X[0][5],
+                                    'excessKurtosisOfTheDMSNRCurve': X[0][6],
+                                    'skewnessOfTheDMSNRCurve': X[0][7],
+                                    'targetClass': int(y[0]),
+                                    'yPred': int(y_pred[0])
+                                    }
+                            if y_pred[0] == 1:
+                                result = asips_utils.FIREBASE_REF.post(asips_utils.BASE_PATH + asips_utils.PREDICTIONS_PATH, data)
+                                print(result)
+                            else:
+                                negative_count = negative_count + 1
+                                if negative_count % 50 == 0:
+                                    result = asips_utils.FIREBASE_REF.post(asips_utils.BASE_PATH + asips_utils.PREDICTIONS_PATH, data)
+                                    print(result)
+
                         except TypeError:
                             raise TypeError("Unexpected prediction value from {}"
                                             .format(type(self.model[i]).__name__))
@@ -340,31 +368,31 @@ class EvaluatePrequential(StreamEvaluator):
                     self._check_progress(actual_max_samples)
 
                     # Train
-                    if first_run:
-                        for i in range(self.n_models):
-                            if self._task_type != constants.REGRESSION and \
-                               self._task_type != constants.MULTI_TARGET_REGRESSION:
-                                # Accounts for the moment of training beginning
-                                self.running_time_measurements[i].compute_training_time_begin()
-                                self.model[i].partial_fit(X, y, self.stream.target_values)
-                                # Accounts the ending of training
-                                self.running_time_measurements[i].compute_training_time_end()
-                            else:
-                                self.running_time_measurements[i].compute_training_time_begin()
-                                self.model[i].partial_fit(X, y)
-                                self.running_time_measurements[i].compute_training_time_end()
-
-                            # Update total running time
-                            self.running_time_measurements[i].update_time_measurements(
-                                self.batch_size)
-                        first_run = False
-                    else:
-                        for i in range(self.n_models):
-                            self.running_time_measurements[i].compute_training_time_begin()
-                            self.model[i].partial_fit(X, y)
-                            self.running_time_measurements[i].compute_training_time_end()
-                            self.running_time_measurements[i].update_time_measurements(
-                                self.batch_size)
+                    # if first_run:
+                    #     for i in range(self.n_models):
+                    #         if self._task_type != constants.REGRESSION and \
+                    #            self._task_type != constants.MULTI_TARGET_REGRESSION:
+                    #             # Accounts for the moment of training beginning
+                    #             self.running_time_measurements[i].compute_training_time_begin()
+                    #             self.model[i].partial_fit(X, y, self.stream.target_values)
+                    #             # Accounts the ending of training
+                    #             self.running_time_measurements[i].compute_training_time_end()
+                    #         else:
+                    #             self.running_time_measurements[i].compute_training_time_begin()
+                    #             self.model[i].partial_fit(X, y)
+                    #             self.running_time_measurements[i].compute_training_time_end()
+                    #
+                    #         # Update total running time
+                    #         self.running_time_measurements[i].update_time_measurements(
+                    #             self.batch_size)
+                    #     first_run = False
+                    # else:
+                    #     for i in range(self.n_models):
+                    #         self.running_time_measurements[i].compute_training_time_begin()
+                    #         self.model[i].partial_fit(X, y)
+                    #         self.running_time_measurements[i].compute_training_time_end()
+                    #         self.running_time_measurements[i].update_time_measurements(
+                    #             self.batch_size)
 
                     if ((self.global_sample_count % self.n_wait) == 0 or
                             (self.global_sample_count >= actual_max_samples) or

@@ -16,6 +16,8 @@ from skmultiflow.metrics import ClassificationPerformanceEvaluator, \
 from skmultiflow.utils import calculate_object_size
 from skmultiflow.visualization.evaluation_visualizer import EvaluationVisualizer
 from .evaluation_data_buffer import EvaluationDataBuffer
+from firebase import firebase
+from skmultiflow.utils import asips_utils
 
 
 class StreamEvaluator(BaseSKMObject, metaclass=ABCMeta):
@@ -72,6 +74,9 @@ class StreamEvaluator(BaseSKMObject, metaclass=ABCMeta):
         self.visualizer = None
         self.n_sliding = 0
         self.global_sample_count = 0
+
+        # Asips
+        self.is_first_round = True
 
     @abstractmethod
     def evaluate(self, stream, model, model_names=None):
@@ -672,6 +677,7 @@ class StreamEvaluator(BaseSKMObject, metaclass=ABCMeta):
         self.global_sample_count = 0
 
     def evaluation_summary(self):
+        mean_performance_path = asips_utils.BASE_PATH + asips_utils.MEAN_PERFORMANCES_PATH
         if self._end_time - self._start_time > self.max_time:
             print('\nTime limit reached ({:.2f}s). Evaluation stopped.'.format(self.max_time))
         print('Processed samples: {}'.format(self.global_sample_count))
@@ -687,6 +693,11 @@ class StreamEvaluator(BaseSKMObject, metaclass=ABCMeta):
                                                           self._data_buffer.get_data(
                                                               metric_id=constants.KAPPA,
                                                               data_id=constants.MEAN)[i]))
+                result = asips_utils.FIREBASE_REF.get(mean_performance_path, 'meanKappa')
+                print(len(result))
+                asips_utils.FIREBASE_REF.put(mean_performance_path+'meanKappa', len(result), self._data_buffer.get_data(
+                                                              metric_id=constants.KAPPA,
+                                                              data_id=constants.MEAN)[i])
             if constants.KAPPA_T in self.metrics:
                 print('{} - Kappa T      : {:.4f}'.format(self.model_names[i],
                                                           self._data_buffer.get_data(
@@ -857,3 +868,6 @@ class StreamEvaluator(BaseSKMObject, metaclass=ABCMeta):
         """
         _, measurements = self.get_measurements(model_idx)
         return measurements
+
+    def write_measures_to_firebase(self):
+        print('')
