@@ -17,7 +17,7 @@ from skmultiflow.utils import calculate_object_size
 from skmultiflow.visualization.evaluation_visualizer import EvaluationVisualizer
 from .evaluation_data_buffer import EvaluationDataBuffer
 from firebase import firebase
-from skmultiflow.utils import asips_utils
+import asips_utils
 
 
 class StreamEvaluator(BaseSKMObject, metaclass=ABCMeta):
@@ -677,7 +677,7 @@ class StreamEvaluator(BaseSKMObject, metaclass=ABCMeta):
         self.global_sample_count = 0
 
     def evaluation_summary(self):
-        mean_performance_path = asips_utils.BASE_PATH + asips_utils.MEAN_PERFORMANCES_PATH
+        dict = {}
         if self._end_time - self._start_time > self.max_time:
             print('\nTime limit reached ({:.2f}s). Evaluation stopped.'.format(self.max_time))
         print('Processed samples: {}'.format(self.global_sample_count))
@@ -688,39 +688,53 @@ class StreamEvaluator(BaseSKMObject, metaclass=ABCMeta):
                                                           self._data_buffer.get_data(
                                                               metric_id=constants.ACCURACY,
                                                               data_id=constants.MEAN)[i]))
+                dict['accuracy'] = self._data_buffer.get_data(
+                                                              metric_id=constants.ACCURACY,
+                                                              data_id=constants.MEAN)[i]
             if constants.KAPPA in self.metrics:
                 print('{} - Kappa        : {:.4f}'.format(self.model_names[i],
                                                           self._data_buffer.get_data(
                                                               metric_id=constants.KAPPA,
                                                               data_id=constants.MEAN)[i]))
-                result = asips_utils.FIREBASE_REF.get(mean_performance_path, 'meanKappa')
-                print(len(result))
-                asips_utils.FIREBASE_REF.put(mean_performance_path+'meanKappa', len(result), self._data_buffer.get_data(
+                dict['kappa'] = self._data_buffer.get_data(
                                                               metric_id=constants.KAPPA,
-                                                              data_id=constants.MEAN)[i])
+                                                              data_id=constants.MEAN)[i]
+
             if constants.KAPPA_T in self.metrics:
                 print('{} - Kappa T      : {:.4f}'.format(self.model_names[i],
                                                           self._data_buffer.get_data(
                                                               metric_id=constants.KAPPA_T,
                                                               data_id=constants.MEAN)[i]))
+
+
             if constants.KAPPA_M in self.metrics:
                 print('{} - Kappa M      : {:.4f}'.format(self.model_names[i],
                                                           self._data_buffer.get_data(
                                                               metric_id=constants.KAPPA_M,
                                                               data_id=constants.MEAN)[i]))
+
             if constants.PRECISION in self.metrics:
                 print('{} - Precision: {:.4f}'.format(self.model_names[i],
                                                       self._data_buffer.get_data(
                                                           metric_id=constants.PRECISION,
                                                           data_id=constants.MEAN)[i]))
+                dict['precision'] = self._data_buffer.get_data(
+                                                          metric_id=constants.PRECISION,
+                                                          data_id=constants.MEAN)[i]
+
             if constants.RECALL in self.metrics:
                 print('{} - Recall: {:.4f}'.format(self.model_names[i], self._data_buffer.get_data(
                     metric_id=constants.RECALL, data_id=constants.MEAN)[i]))
+                dict['recall'] = self._data_buffer.get_data(
+                    metric_id=constants.RECALL, data_id=constants.MEAN)[i]
             if constants.F1_SCORE in self.metrics:
                 print('{} - F1 score: {:.4f}'.format(self.model_names[i],
                                                      self._data_buffer.get_data(
                                                          metric_id=constants.F1_SCORE,
                                                          data_id=constants.MEAN)[i]))
+                dict['fScore'] = self._data_buffer.get_data(
+                                                         metric_id=constants.F1_SCORE,
+                                                         data_id=constants.MEAN)[i]
             if constants.HAMMING_SCORE in self.metrics:
                 print('{} - Hamming score: {:.4f}'.format(self.model_names[i],
                                                           self._data_buffer.get_data(
@@ -789,6 +803,7 @@ class StreamEvaluator(BaseSKMObject, metaclass=ABCMeta):
                                                                 self._data_buffer.get_data(
                                                                     metric_id=constants.MODEL_SIZE,
                                                                     data_id='model_size')[i]))
+            return dict
 
     def get_measurements(self, model_idx=None):
         """ Get measurements from the evaluation.

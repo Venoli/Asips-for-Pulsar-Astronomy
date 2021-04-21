@@ -8,7 +8,8 @@ from numpy import unique
 
 from skmultiflow.evaluation.base_evaluator import StreamEvaluator
 from skmultiflow.utils import constants
-from skmultiflow.utils import asips_utils
+import asips_utils
+from firebase_helper import FirebaseHelper
 
 
 class EvaluatePrequential(StreamEvaluator):
@@ -319,6 +320,7 @@ class EvaluatePrequential(StreamEvaluator):
 
         update_count = 0
         negative_count = 0
+        saving_gap = self.stream.n_remaining_samples()/10
         print('Evaluating...')
         while ((self.global_sample_count < actual_max_samples)
                & (self._end_time - self._start_time < self.max_time)
@@ -348,12 +350,12 @@ class EvaluatePrequential(StreamEvaluator):
                                     'yPred': int(y_pred[0])
                                     }
                             if y_pred[0] == 1:
-                                result = asips_utils.FIREBASE_REF.post(asips_utils.BASE_PATH + asips_utils.PREDICTIONS_PATH, data)
+                                result = FirebaseHelper.save_signal_to_firebase(asips_utils.PREDICTIONS_PATH, data)
                                 print(result)
                             else:
                                 negative_count = negative_count + 1
-                                if negative_count % 50 == 0:
-                                    result = asips_utils.FIREBASE_REF.post(asips_utils.BASE_PATH + asips_utils.PREDICTIONS_PATH, data)
+                                if negative_count % saving_gap == 0:
+                                    result = FirebaseHelper.save_signal_to_firebase(asips_utils.PREDICTIONS_PATH, data)
                                     print(result)
 
                         except TypeError:
