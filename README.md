@@ -1,4 +1,4 @@
-<img src="https://raw.githubusercontent.com/scikit-multiflow/scikit-multiflow/AddGaussianHellingerSplitCriterion/docs/_static/images/Asips-logo.png" height="100"/>
+<img src="/docs/_static/images/Asips-logo.png" height="100"/>
 kit-multiflow` is a machine learning package for streaming data in Python.
 
 
