@@ -44,8 +44,11 @@ This API provide verification feature from other libraries. For now this provide
 - Gaussian Hellinger Very Fast Decision Tree [4] - Main encouragement behind the GH-EFDT
 
 [1] C. Manapragada, G. I. Webb, and M. Salehi, “Extremely Fast Decision Tree,” 2018. DOI: 10.1145/nnnnnnn. arXiv: 1802.08780v1.
+
 [2] R. J. Lyon, J. M. Brooke, J. D. Knowles, and B. W. Stappers, “Hellinger distance trees for imbalanced streams,” in Proceedings - International Conference on         Pattern Recognition, Institute of Electrical and Electron- ics Engineers Inc., Dec. 2014, pp. 1969–1974, ISBN: 9781479952083. DOI: 10.1109/ICPR.2014.344.           arXiv: 1405.2278.
+
 [3] Montiel, J., Read, J., Bifet, A., & Abdessalem, T. (2018). Scikit-multiflow: A multi-output streaming framework. The Journal of Machine Learning Research,           19(72):1−5.
+
 [4] R. J. Lyon, B. W. Stappers, S. Cooper, J. M. Brooke, and J. D. Knowles, “Fifty years of pulsar candidate selection: From simple filters to a new principled         real- time classification approach,” Monthly Notices of the Royal Astronomical Society, vol. 459, no. 1, pp. 1104– 1123, Jun. 2016, ISSN: 13652966. DOI:             10.1093/mnras/ stw656. arXiv: 1603.05166.
 
 
