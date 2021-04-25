@@ -1,4 +1,4 @@
-<img src="/docs/_static/images/Asips-logo.png" height="100"/>
+<img src="https://github.com/Venoli/Asips-for-Pulsar-Astronomy/blob/AddGaussianHellingerSplitCriterion/docs/_static/images/Asips-logo.png?raw=true" height="100"/>
 kit-multiflow` is a machine learning package for streaming data in Python.
 
 
