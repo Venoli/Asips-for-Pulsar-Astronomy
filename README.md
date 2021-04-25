@@ -47,14 +47,14 @@ cd src/asips
 Since this is developed using Flask, the above code will start the server on http://localhost:5000/. (This will refer as BASE_URL in the below sections)
 
 ### Pretrain
-Below request will pretrain the model. 
+Below request will pretrain the model. <br>
 count: pretrain count
 ```python
 BASE_URL/pretrain/<count>
 ```
 
 ### Predict
-Below request will make a prediction using the model. 
+Below request will make a prediction using the model.  <br>
 count: number of samples to predict
 ```python
 BASE_URL/predict/<count>
@@ -66,14 +66,14 @@ By below request model will learn from all of the early predictions
 BASE_URL/learn-from-all
 ```
 ### Learn by id
-By below request model will learn from sample with given id
+By below request model will learn from sample with given id.  <br>
 id: id of the sample
 ```python
 BASE_URL/learn/<id>
 ```
 
 ### Test with Another Classifier
-By below request previouse predictions can be verified using another model
+By below request previouse predictions can be verified using another model.  <br>
 model: name of the model. 
       (smoteBagging, underOverBagging)
 ```python
