@@ -3,7 +3,7 @@ import datetime
 
 start_time = datetime.datetime.now()
 stream = FileStream('pulsar_data_train.csv')
-
+#Create GH-EFDT
 efdtgh = ExtremelyFastDecisionTreeClassifier(split_criterion='gaussian_hellinger')
 
 print("info: ")

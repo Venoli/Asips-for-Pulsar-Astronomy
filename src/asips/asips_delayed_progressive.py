@@ -23,8 +23,14 @@ import json
 from firebase_helper import FirebaseHelper
 
 class Asips:
+    """ Asips.
+            efdtgh: ExtremelyFastDecisionTreeClassifier(split_criterion='gaussian_hellinger')
+                Extremely Fast Decision Tree with the split criterion as gaussian_hellinger
+            evaluator: EvaluatePrequential
+                Evaluator for progressive predictions from GH-EFDT
+
+    """
     def __init__(self):
-        self.last_sample_count = 0
         self.efdtgh = ExtremelyFastDecisionTreeClassifier(split_criterion='gaussian_hellinger')
         self.evaluator = EvaluatePrequential(show_plot=False,
                                              pretrain_size=0,
@@ -33,6 +39,7 @@ class Asips:
                                                  'running_time'],
                                              n_wait=20,
                                              output_file="../output_file")
+        self.last_sample_count = 0
         # read csv
         print('-------READ CSV-------')
         data_frame = pd.read_csv('pulsar_data_train.csv')

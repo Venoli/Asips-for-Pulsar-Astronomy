@@ -61,10 +61,33 @@ class GaussianHellingerDistanceCriterion(SplitCriterion):
     # added by Venoli
     @staticmethod
     def compute_hellinger(p_mean, p_variance, q_mean, q_variance):
+        """ Calculates Hellinger distance among gaussian distributions of a feature attribute
+        in two classes.
+
+               Parameters
+               ----------
+               p_mean: numpy.float64
+                    mean of the distribution of a single feature in one class (Class A)
+               p_variance: numpy.float64
+                   variance of the distribution of a single feature in one class (Class A)
+
+               q_mean: numpy.float64
+                   mean of the distribution of a single feature in the other class (Class B)
+
+               q_variance: numpy.float64
+                   variance of the distribution of a single feature in the other class (Class B)
+
+               Returns
+               -------
+               numpy.float64
+                   The calculated Hellinger distance.
+
+               """
         hellinger = 0.0
         p_stdev = np.sqrt(p_variance)
         q_stdev = np.sqrt(q_variance)
-        hellinger = 1.0 - np.sqrt((2.0 * p_stdev * q_stdev)/(p_variance + q_variance)) * np.exp((-1.0/4.0) * (np.power(p_mean - q_mean, 2)/(p_variance + q_variance)))
+        hellinger = 1.0 - np.sqrt((2.0 * p_stdev * q_stdev)/(p_variance + q_variance)) * \
+                    np.exp((-1.0/4.0) * (np.power(p_mean - q_mean, 2)/(p_variance + q_variance)))
         # print("gaussian_hellinger_distance_criterion: compute_hellinger venoli")
 
         return np.sqrt(hellinger)

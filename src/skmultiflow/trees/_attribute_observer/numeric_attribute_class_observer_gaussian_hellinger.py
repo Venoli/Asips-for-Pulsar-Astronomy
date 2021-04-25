@@ -66,7 +66,17 @@ class NumericAttributeClassObserverGaussianHellinger(AttributeObserver):
                 n_variance = self._att_val_dist_per_class[0].get_variance()
                 p_mean = self._att_val_dist_per_class[1].get_mean()
                 p_variance = self._att_val_dist_per_class[1].get_variance()
+                # print (type(n_mean))
+                # print (type(n_variance))
+                # print (type(p_mean))
+                # print (type(p_variance))
+                # print(n_mean)
+                # print(n_variance)
+                # print(p_mean)
+                # print(p_variance)
                 merit = GaussianHellingerDistanceCriterion.compute_hellinger(p_mean, p_variance, n_mean, n_variance)
+                # print(type(merit))
+                # print(merit)
 
             if best_suggestion is None or (merit+info_gain) > best_suggestion.merit:
                 # print("numeric_attribute_class_observer_gaussian_hellinger: if02")

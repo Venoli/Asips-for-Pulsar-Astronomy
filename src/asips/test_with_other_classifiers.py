@@ -54,18 +54,15 @@ class TestWithOtherClassifiers:
         predictions = FirebaseHelper.get_signal_from_firebase('')
         s = json.dumps(predictions, cls=jsonutil.JSONEncoder)
         json_list = json.loads(s)
-        print('333333333333')
         print(s)
         print(json_list)
 
         for j in json_list:
-            print('444444444')
             print(j)
             print(json_list[j])
             stream = self.preprocess(json_list[j])
             if model == 'smote_bagging':
                 y_pred = self.online_smote_bagging_classifier(stream)
-                print('aaaaaaaaa')
                 print(y_pred[0])
                 print(type(y_pred[0]))
                 FirebaseHelper.update_signal_record(j, 'smoteBagging', int(y_pred[0]))
