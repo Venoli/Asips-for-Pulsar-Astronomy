@@ -6,7 +6,7 @@
 
 ### Quick links
 * [Webpage](https://asips-for-pulsars-astronomy.web.app/)
-* [Documentation](https://github.com/Venoli/Asips-for-Pulsar-Astronomy/edit/AddGaussianHellingerSplitCriterion/README.md)
+* [Documentation](https://github.com/Venoli/Asips-for-Pulsar-Astronomy#readme)
 
 # Features
 
