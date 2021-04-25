@@ -32,7 +32,7 @@ This API provide verification feature from other libraries. For now this provide
 
 ## Quick Start
 ```python
-%matplotlib notebook
+git clone https://github.com/Venoli/Asips-for-Pulsar-Astronomy.git
 ```
 
 
