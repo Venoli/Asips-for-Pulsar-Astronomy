@@ -1,36 +1,10 @@
-<img src="https://raw.githubusercontent.com/scikit-multiflow/scikit-multiflow/master/docs/_static/images/skmultiflow-logo-wide.png" height="100"/>
+<img src="https://raw.githubusercontent.com/scikit-multiflow/scikit-multiflow/AddGaussianHellingerSplitCriterion/docs/_static/images/Asips-logo.png" height="100"/>
+kit-multiflow` is a machine learning package for streaming data in Python.
 
-[![Build status](https://travis-ci.org/scikit-multiflow/scikit-multiflow.svg?branch=master)](https://travis-ci.org/scikit-multiflow/scikit-multiflow)
-[![Build Status](https://dev.azure.com/scikit-multiflow/scikit-multiflow/_apis/build/status/scikit-multiflow.scikit-multiflow?branchName=master)](https://dev.azure.com/scikit-multiflow/scikit-multiflow/_build/latest?definitionId=1&branchName=master)
-[![codecov](https://codecov.io/gh/scikit-multiflow/scikit-multiflow/branch/master/graph/badge.svg)](https://codecov.io/gh/scikit-multiflow/scikit-multiflow)
-![Python version](https://img.shields.io/badge/python-3.5%20%7C%203.6%20%7C%203.7%20%7C%203.8-blue.svg)
-[![Anaconda-Server Badge](https://anaconda.org/conda-forge/scikit-multiflow/badges/platforms.svg)](https://anaconda.org/conda-forge/scikit-multiflow)
-[![PyPI version](https://badge.fury.io/py/scikit-multiflow.svg)](https://badge.fury.io/py/scikit-multiflow)
-[![Anaconda-Server Badge](https://anaconda.org/conda-forge/scikit-multiflow/badges/version.svg)](https://anaconda.org/conda-forge/scikit-multiflow)
-[![DockerHub](https://img.shields.io/badge/docker-available-blue.svg?logo=docker)](https://hub.docker.com/r/skmultiflow/scikit-multiflow)
-[![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
-[![Gitter](https://badges.gitter.im/scikit-multiflow/community.svg)](https://gitter.im/scikit-multiflow/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
-
-`scikit-multiflow` is a machine learning package for streaming data in Python.
-
----
-
-[creme](https://MaxHalford.github.io/) and [scikit-multiflow](https://scikit-multiflow.github.io/) are merging into a new project called [River](https://github.com/online-ml/river/).
-
-We feel that both projects share the same vision. We believe that pooling our resources instead of duplicating work will benefit both sides. We are also confident that this will benefit both communities. There will be more people working on the new project, which will allow us to distribute work more efficiently. We will thus be able to work on more features and improve the overall quality of the project.
-
-Both projects will stop active development. The code for both projects will remain publicly available, although development will only focus on minor maintenance during a transition period. The architecture of the new package is very similar to that of creme. It will focus on single-instance incremental models.
-
-We encourage users to use River instead of creme. We understand that this transition will require an extra effort in the short term from current users. However, we believe that the result will be better for everyone in the long run.
-
-You will still be able to install and use `creme` as well as `scikit-multiflow`. Both projects will remain on PyPI, conda-forge and GitHub.
-
----
 
 ### Quick links
 * [Webpage](https://scikit-multiflow.github.io/)
 * [Documentation](https://scikit-multiflow.readthedocs.io/en/stable/)
-* [Community](https://scikit-multiflow.github.io/community/)
 
 # Features
 
