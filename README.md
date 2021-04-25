@@ -76,6 +76,7 @@ BASE_URL/learn/<id>
 By below request previouse predictions can be verified using another model
 model: name of the model. 
       (smoteBagging, underOverBagging)
+```python
 BASE_URL/test-with-other-classifier/<model>
 ```
 
