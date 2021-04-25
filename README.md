@@ -2,7 +2,7 @@
 <p><img src="https://github.com/Venoli/Asips-for-Pulsar-Astronomy/blob/AddGaussianHellingerSplitCriterion/docs/_static/images/Asips-logo.png?raw=true" height="100"/></p>
 <h1>Asips for Pulsar Astronomy</h1>  
 'Asips' is a Research cunducted for automating pulsar candidate selection. This is the API of Asips which can be used by anyone
-
+This implementation uses the HTRU2 dataset 
 
 ### Quick links
 * [Webpage](https://asips-for-pulsars-astronomy.web.app/)
@@ -30,11 +30,54 @@ This API provide verification feature from other libraries. For now this provide
 - 2) OnlineUnderOverBaggingClassifier
 
 
-## Quick Start
+## Installation
+Clone the repository
+
 ```python
 git clone https://github.com/Venoli/Asips-for-Pulsar-Astronomy.git
 ```
+Run the Jupyter notebook inside the src folder
+```python
+cd src/asips
+!python flask_api.py
+```
 
+## Quick Start
+
+Since this is developed using Flask, the above code will start the server on http://localhost:5000/. (This will refer as BASE_URL in the below sections)
+
+### Pretrain
+Below request will pretrain the model. 
+count: pretrain count
+```python
+BASE_URL/pretrain/<count>
+```
+
+### Predict
+Below request will make a prediction using the model. 
+count: number of samples to predict
+```python
+BASE_URL/predict/<count>
+```
+
+### Learn from all
+By below request model will learn from all of the early predictions
+```python
+BASE_URL/learn-from-all
+```
+### Learn by id
+By below request model will learn from sample with given id
+id: id of the sample
+```python
+BASE_URL/learn/<id>
+```
+
+### Test with Another Classifier
+By below request previouse predictions can be verified using another model
+model: name of the model. 
+      (smoteBagging, underOverBagging)
+BASE_URL/test-with-other-classifier/<model>
+```
 
 # Credits
 - Extremely Fast Decission Tree (EFDT) [1] - GH-EFDT is a improved version of EFDT
@@ -42,6 +85,7 @@ git clone https://github.com/Venoli/Asips-for-Pulsar-Astronomy.git
 - Scikit-Multiflow [3] - research, implimentation and testing was done on top of the scikit-multiflow library.
   scikit-multiflow implementation of EFDT was modified.
 - Gaussian Hellinger Very Fast Decision Tree [4] - Main encouragement behind the GH-EFDT
+- HTRU2 dataset [5] - The dataset that used in development
 
 [1] C. Manapragada, G. I. Webb, and M. Salehi, “Extremely Fast Decision Tree,” 2018. DOI: 10.1145/nnnnnnn. arXiv: 1802.08780v1.
 
@@ -51,5 +95,4 @@ git clone https://github.com/Venoli/Asips-for-Pulsar-Astronomy.git
 
 [4] R. J. Lyon, B. W. Stappers, S. Cooper, J. M. Brooke, and J. D. Knowles, “Fifty years of pulsar candidate selection: From simple filters to a new principled         real- time classification approach,” Monthly Notices of the Royal Astronomical Society, vol. 459, no. 1, pp. 1104– 1123, Jun. 2016, ISSN: 13652966. DOI:             10.1093/mnras/ stw656. arXiv: 1603.05166.
 
-
-
+[5] R. J. Lyon, B. W. Stappers, S. Cooper, J. M. Brooke, J. D. Knowles, Fifty Years of Pulsar Candidate Selection: From simple filters to a new principled real-time     classification approach, Monthly Notices of the Royal Astronomical Society 459 (1), 1104-1123, DOI: 10.1093/mnras/stw656
