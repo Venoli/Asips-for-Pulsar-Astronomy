@@ -1,5 +1,5 @@
 
-<p align="center"><img src="https://github.com/Venoli/Asips-for-Pulsar-Astronomy/blob/AddGaussianHellingerSplitCriterion/docs/_static/images/Asips-logo.png?raw=true" height="100"/></p>
+<p><img src="https://github.com/Venoli/Asips-for-Pulsar-Astronomy/blob/AddGaussianHellingerSplitCriterion/docs/_static/images/Asips-logo.png?raw=true" height="100"/></p>
 <h1>Asips for Pulsar Astronomy</h1>  
 'Asips' is a Research cunducted for automating pulsar candidate selection. This is the API of Asips which can be used by anyone
 
