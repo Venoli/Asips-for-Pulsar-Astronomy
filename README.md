@@ -30,7 +30,7 @@ This API provide verification feature from other libraries. For now this provide
 - 2) OnlineUnderOverBaggingClassifier
 
 
-## Installation
+## 🛠 Installation
 Clone the repository
 
 ```python
@@ -42,7 +42,7 @@ cd src/asips
 !python flask_api.py
 ```
 
-## Quick Start
+## ⚡️ Quick Start
 
 Since this is developed using Flask, the above code will start the server on http://localhost:5000/. (This will refer as BASE_URL in the below sections)
 
