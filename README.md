@@ -1,6 +1,5 @@
 
-<img src="https://github.com/Venoli/Asips-for-Pulsar-Astronomy/blob/AddGaussianHellingerSplitCriterion/docs/_static/images/Asips-logo.png?raw=true" height="100"/><p align="left"><h1>Asips for Pulsar Astronomy</h1></p>
-
+<h1>Asips for Pulsar Astronomy <p align="right"><img src="https://github.com/Venoli/Asips-for-Pulsar-Astronomy/blob/AddGaussianHellingerSplitCriterion/docs/_static/images/Asips-logo.png?raw=true" height="100"/></p></h1> 
 'Asips' is a machine learning package for streaming data in Python.
 
 
