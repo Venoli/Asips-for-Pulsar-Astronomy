@@ -8,7 +8,7 @@ This implementation uses the HTRU2 dataset
 * [Webpage](https://asips-for-pulsars-astronomy.web.app/)
 * [Documentation](https://github.com/Venoli/Asips-for-Pulsar-Astronomy#readme)
 
-# Features
+# :fire: Features
 
 ### Gaussian Hellinger Extremely Fast Decision Tree (GH-EFDT)
 This is the main output of the research. GH-EFDT is a stream learning algorithm. This is an 
@@ -80,7 +80,7 @@ model: name of the model.
 BASE_URL/test-with-other-classifier/<model>
 ```
 
-# Credits
+# :open_book: Credits
 - Extremely Fast Decission Tree (EFDT) [1] - GH-EFDT is a improved version of EFDT
 - Hellinger Distance among Gaussian Distributions [2] - The improvemrnt done by using hellinger distance
 - Scikit-Multiflow [3] - research, implimentation and testing was done on top of the scikit-multiflow library.
