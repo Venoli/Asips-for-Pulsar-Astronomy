@@ -32,9 +32,6 @@ jobs:
         
       - name: Cython
         run: pip install -U Cython
-      
-      - name: Compile
-        run: python setup.py build_ext --inplace
     
       - name: Print  
         run: pwd
