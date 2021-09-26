@@ -30,6 +30,10 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
         
+      - name: Cython
+        run: pip install -U Cython
+
+        
       - name: Print  
         run: pwd
       
