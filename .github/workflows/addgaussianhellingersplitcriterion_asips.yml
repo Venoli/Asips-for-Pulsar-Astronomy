@@ -32,7 +32,10 @@ jobs:
         
       - name: Cython
         run: pip install -U Cython
-    
+  
+      - name: Compile
+        run: python src/asips/skmultiflow/metrics/setup.py build_ext --inplace
+        
       - name: Print  
         run: pwd
       
