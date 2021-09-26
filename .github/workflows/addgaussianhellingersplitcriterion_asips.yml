@@ -32,6 +32,9 @@ jobs:
         
       - name: Cython
         run: pip install -U Cython
+      
+      - name: Compile
+        run: python setup.py build_ext --inplace
     
       - name: Print  
         run: pwd
@@ -40,7 +43,7 @@ jobs:
         run: ls -l
         
       - name: Run api
-        run: python src/asips/flask_api.py build_ext --inplace
+        run: python src/asips/flask_api.py
         
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
       
