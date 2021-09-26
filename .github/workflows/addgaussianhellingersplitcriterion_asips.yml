@@ -31,7 +31,7 @@ jobs:
         run: pip install -r requirements.txt
       
       - name: Change directory
-        run: cd src/asips
+        run: pwd
         
       - name: Run api
         run: python flask_api.py
