@@ -29,6 +29,12 @@ jobs:
       
       - name: Install dependencies
         run: pip install -r requirements.txt
+      
+      - name: Change directory
+        run: cd src/asips
+        
+      - name: Run api
+        run: python flask_api.py
         
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
       
