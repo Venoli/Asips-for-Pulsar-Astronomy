@@ -1,8 +1,8 @@
 
 <p><img src="https://github.com/Venoli/Asips-for-Pulsar-Astronomy/blob/AddGaussianHellingerSplitCriterion/docs/_static/images/Asips-logo.png?raw=true" height="100"/></p>
 <h1>Asips for Pulsar Astronomy</h1>  
-'Asips' is a Research cunducted for automating pulsar candidate selection. This is the API of Asips which can be used by anyone
-This implementation uses the HTRU2 dataset 
+'Asips' is a Research cunducted for automating pulsar candidate selection. This is the API of Asips which can be used by anyone.
+This implementation uses the HTRU2 dataset.
 
 ### Quick links
 * [Webpage](https://asips-for-pulsars-astronomy.web.app/)
