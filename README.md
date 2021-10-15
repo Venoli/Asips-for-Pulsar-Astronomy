@@ -5,7 +5,7 @@
 This implementation uses the HTRU2 dataset.
 
 ### Quick links
-* [Webpage](https://asips-for-pulsars-astronomy.web.app/)
+* [Website (Demo web app)](https://asips-for-pulsars-astronomy.web.app/)
 * [Documentation](https://github.com/Venoli/Asips-for-Pulsar-Astronomy#readme)
 
 # :fire: Features
